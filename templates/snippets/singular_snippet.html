@@ -9,6 +9,8 @@
 <pre><code>{{ snippet.code_body }}</code></pre>
 <p>{{ snippet.tags }}</p>
 
+<p><a href="{% url 'delete_snippet' snippet_pk=snippet.pk %}">Delete</a></p>
+<p><a href="{% url 'edit_snippet' snippet_pk=snippet.pk %}">Edit</a></p>
 <p><a href="{% url 'display_snippets' %}">Back to All Snippets</a></p>
 
 

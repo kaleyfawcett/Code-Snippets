@@ -33,3 +33,27 @@ def new_snippets(request):
 def singular_snippet(request, snippet_pk):
     snippet = get_object_or_404(request.user.codesnippets, pk=snippet_pk)
     return render(request, "snippets/singular_snippet.html", {"snippet": snippet})    
+
+@login_required
+def delete_snippet(request, snippet_pk):
+    snippet = get_object_or_404(request.user.codesnippets, pk=snippet_pk)
+    if request.method == "POST":
+        snippet.delete()
+        return redirect(to='display_snippets')
+    return render(request, "snippets/delete_snippet.html", {"snippet": snippet})   
+
+@login_required
+def edit_snippet(request, snippet_pk):
+    snippet = get_object_or_404(request.user.codesnippets, pk=snippet_pk)
+    if request.method == "POST":
+        form = SnippetForm(instance=snippet, data=request.POST)
+        if form.is_valid():
+            snippet = form.save()
+            return redirect(to="singular_snippet", snippet_pk=snippet.pk)
+    else: 
+        form = SnippetForm(instance=snippet)
+    return render(request, "snippets/edit_snippet.html", {"form": form, "snippet": snippet})            
+
+
+
+

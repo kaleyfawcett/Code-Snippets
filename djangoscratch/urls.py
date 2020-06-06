@@ -25,6 +25,8 @@ urlpatterns = [
     path('snippet/', snippet_views.display_snippets, name='display_snippets'),
     path('snippet/new/', snippet_views.new_snippets, name='new_snippets'),
     path('snippet/<int:snippet_pk>/', snippet_views.singular_snippet, name='singular_snippet'),
+    path('snippet/<int:snippet_pk>/delete/', snippet_views.delete_snippet, name='delete_snippet'),
+    path('snippet/<int:snippet_pk>/edit/', snippet_views.edit_snippet, name='edit_snippet'),
 ]
 
 if settings.DEBUG:
