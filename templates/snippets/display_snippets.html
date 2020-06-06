@@ -6,8 +6,9 @@
     <a href="{% url 'new_snippets' %}"> Add a new snippet!</a>
 </p>
 <ul>
-    {% for snippets in codesnippets %}
-    <li><a href="{% url 'new_snippets' snippet_pk=snippet.pk %}">{{ snippet.title }}</a></li>
-    {% endfor %}
+{% for snippet in snippets.all %}
+    <li><a href="{% url 'singular_snippet' snippet_pk=snippet.pk %}">{{ snippet.title }}</a></li>
+{% endfor %}
 </ul>
+
 {% endblock %} 

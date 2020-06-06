@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 
-# from .models import CodeSnippet
+from .models import CodeSnippet
 # from .models import Tag
 from .forms import SnippetForm, TagForm
 
@@ -12,11 +12,9 @@ def homepage(request):
 
 @login_required
 def display_snippets(request):
-    snippets = request.user.codesnippets.all()
-    form = SnippetForm(data=request.POST)
-    return render (request, 'snippets/display_snippets.html',
-                {"snip_form": form,
-                "snippets": snippets,})
+    your_snippets = request.user.codesnippets.all()
+    return render(request, 'snippets/display_snippets.html',
+                {"snippets": your_snippets})
 
 @login_required
 def new_snippets(request):
@@ -26,7 +24,7 @@ def new_snippets(request):
             snippet = form.save(commit=False)
             snippet.user = request.user
             snippet.save()
-            return redirect(to='singular_snippet')
+        return redirect(to='singular_snippet', snippet_pk=snippet.pk)
     else:
         form = SnippetForm()
     return render(request, 'snippets/new_snippets.html', {"form": form})        
