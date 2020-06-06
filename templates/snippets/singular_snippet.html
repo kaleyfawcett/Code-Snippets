@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>{{ snippet.title }}</h2>
+
+<p>{{ snippet.created_at }}</p>
+<p>{{ snippet.language }}</p>
+<pre><code>{{ snippet.code_body }}</code></pre>
+<p>{{ snippet.tags }}</p>
+
+<p><a href="{% url 'singular_snippet' snippet_pk=snippet.pk %}">Snippets</a></p>
+
+
+
+{% endblock %}

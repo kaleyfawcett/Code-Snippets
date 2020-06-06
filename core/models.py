@@ -2,7 +2,7 @@ from django.db import models
 from users.models import User 
 
 class Tag(models.Model):
-    tag = models.CharField(max_length=100, unique=True) 
+    tag = models.CharField(max_length=200, unique=True) 
 
     def __str__(self):
         return self.tag 

@@ -21,9 +21,10 @@ from core import views as snippet_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('registration.backends.simple.urls')),
-    path('', snippet_views.homepage),
-    path('snippet/', snippet_views.display_snippets),
-    path('snippet/new/', snippet_views.new_snippets),
+    path('', snippet_views.homepage, name='homepage'),
+    path('snippet/', snippet_views.display_snippets, name='display_snippets'),
+    path('snippet/new/', snippet_views.new_snippets, name='new_snippets'),
+    path('snippet/<int:snippet_pk>/', snippet_views.singular_snippet, name='singular_snippet'),
 ]
 
 if settings.DEBUG:

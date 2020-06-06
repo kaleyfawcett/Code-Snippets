@@ -1,15 +1,16 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Add Snippet</h1>
 
-<div>
-    <form action="{% url 'new_snippet' %}" method="POST">
+    <h2>Add Your Code Snippet Here: </h2>
+    <br>
+
+    <form action="{% url 'new_snippets' %}" method="POST">
         {% csrf_token %}
-        {{ snip_form.as_p }}
+        {{ form.as_p }}
         <div>
-            <button type="submit">Add Code Snippet</button>
+            <button type="submit">Add Snippet</button>
         </div>
     </form>
-</div>
-{% endblock %} 
+
+{% endblock %}

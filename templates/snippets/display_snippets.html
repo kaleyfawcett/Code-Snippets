@@ -3,11 +3,11 @@
 {% block content %}
 <h2>Your Code Snippets:</h2>
 <p>
-    <a href = "{% url 'new_snippet' %"> Add a new snippet!</a>
+    <a href="{% url 'new_snippets' %}"> Add a new snippet!</a>
 </p>
 <ul>
-    {% for snippet in snippets.all %}
-    <li><a href= "{% url 'new_snippet' snippet_pk=snippet.pk %}">{{ snippet. title }}</a></li>
+    {% for snippets in codesnippets %}
+    <li><a href="{% url 'new_snippets' snippet_pk=snippet.pk %}">{{ snippet.title }}</a></li>
     {% endfor %}
 </ul>
-{% endblock %}
+{% endblock %} 
