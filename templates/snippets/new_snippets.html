@@ -9,8 +9,12 @@
         {% csrf_token %}
         {{ form.as_p }}
         <div>
-            <button type="submit">Add Snippet</button>
+            <button type="submit" class="btn btn-info">Add Snippet</button>
         </div>
+        
     </form>
+    <div>
+        <a href="{% url 'display_snippets' %}"><button type="button" class="btn btn-outline-info">Return to All Snippets</button></a>
+    </div>
 
 {% endblock %}

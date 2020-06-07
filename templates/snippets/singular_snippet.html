@@ -2,16 +2,16 @@
 
 {% block content %}
 
-<h2>{{ snippet.title }}</h2>
+<h3>Title: {{ snippet.title }}</h3>
 
-<p>{{ snippet.created_at }}</p>
-<p>{{ snippet.language }}</p>
-<pre><code>{{ snippet.code_body }}</code></pre>
-<p>{{ snippet.tags }}</p>
+<p>Created: {{ snippet.created_at }}</p>
+<p>Code Language: {{ snippet.language }}</p>
+<pre><code>Code: {{ snippet.code_body }}</code></pre>
+<p>Tags: {{ snippet.tags }}</p>
 
-<p><a href="{% url 'delete_snippet' snippet_pk=snippet.pk %}">Delete</a></p>
-<p><a href="{% url 'edit_snippet' snippet_pk=snippet.pk %}">Edit</a></p>
-<p><a href="{% url 'display_snippets' %}">Back to All Snippets</a></p>
+<p><a href="{% url 'delete_snippet' snippet_pk=snippet.pk %}"><button type="button" class="btn btn-outline-danger">Delete</button></a></p>
+<p><a href="{% url 'edit_snippet' snippet_pk=snippet.pk %}"><button type="button" class="btn btn-outline-warning">Edit</button></a></p>
+<p><a href="{% url 'display_snippets' %}"><button type="button" class="btn btn-outline-info">Back to All Snippets</button></a></p>
 
 
 
