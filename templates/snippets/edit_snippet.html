@@ -1,9 +1,12 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <form action="{% url 'edit_snippet' snippet_pk=snippet.pk %}" method="POST">
-{% csrf_token %}
-{{ form.as_p }}
+<h2 class= "col px-md-5 p-3"></h2>
+<div  class="col px-md-5 p-3 border bg-light">
+    <form action="{% url 'edit_snippet' snippet_pk=snippet.pk %}" method="POST">      
+        {% csrf_token %}
+        {{ form.as_p }}
+</div>        
     <p>Do you want to edit '{{ snippet.title}}'?</p>
     <button type="submit" class="btn btn-outline-warning">Edit</button>
     <a href="{% url 'singular_snippet' snippet_pk=snippet.pk %}"><button type="button" class="btn btn-outline-info">Cancel</button></a>
