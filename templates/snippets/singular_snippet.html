@@ -7,7 +7,7 @@
     <a href="{% url 'edit_snippet' snippet_pk=snippet.pk %}"><button type="button" class="btn btn-outline-warning">Edit</button></a>
     <a href="{% url 'delete_snippet' snippet_pk=snippet.pk %}"><button type="button" class="btn btn-outline-danger">Delete</button></a>
 </p>
-<div  class="card bg-dark text-black">
+<div class="card bg-dark text-black">
     <img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/87e94664-b916-435a-8db9-8a8d37831c2d/d6lwzf7-580276a0-c893-4ccc-a90c-4aa2e53659da.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3sicGF0aCI6IlwvZlwvODdlOTQ2NjQtYjkxNi00MzVhLThkYjktOGE4ZDM3ODMxYzJkXC9kNmx3emY3LTU4MDI3NmEwLWM4OTMtNGNjYy1hOTBjLTRhYTJlNTM2NTlkYS5wbmcifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6ZmlsZS5kb3dubG9hZCJdfQ.VGNViRLgogFyCtUF8xReOSm0gmZ2CYp4TkGxLgKtNBk" class="card-img" alt="...">
     <div class="card-img-overlay">
     <div class="card p-2">
@@ -29,9 +29,16 @@
             </p>
 
             <p>
-                <svg class="bi bi-tag" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M.5 2A1.5 1.5 0 0 1 2 .5h4.586a1.5 1.5 0 0 1 1.06.44l7 7a1.5 1.5 0 0 1 0 2.12l-4.585 4.586a1.5 1.5 0 0 1-2.122 0l-7-7A1.5 1.5 0 0 1 .5 6.586V2zM2 1.5a.5.5 0 0 0-.5.5v4.586a.5.5 0 0 0 .146.353l7 7a.5.5 0 0 0 .708 0l4.585-4.585a.5.5 0 0 0 0-.708l-7-7a.5.5 0 0 0-.353-.146H2z"/><path fill-rule="evenodd" d="M2.5 4.5a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm2-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/></svg> Tags: {{ snippet.tags }} 
-            </p> 
-
+                <svg class="bi bi-tag" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M.5 2A1.5 1.5 0 0 1 2 .5h4.586a1.5 1.5 0 0 1 1.06.44l7 7a1.5 1.5 0 0 1 0 2.12l-4.585 4.586a1.5 1.5 0 0 1-2.122 0l-7-7A1.5 1.5 0 0 1 .5 6.586V2zM2 1.5a.5.5 0 0 0-.5.5v4.586a.5.5 0 0 0 .146.353l7 7a.5.5 0 0 0 .708 0l4.585-4.585a.5.5 0 0 0 0-.708l-7-7a.5.5 0 0 0-.353-.146H2z"/><path fill-rule="evenodd" d="M2.5 4.5a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm2-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/></svg> Tags: {{ tag }} 
+            
+                {% if snippet.tags.count > 0 %}
+                
+                {% for tag in snippet.tags.all %}
+                    <a href="{% url 'view_tag' tag_name=tag.tag %}">{{ tag }}</a>
+                {% endfor %}
+                
+                {% endif %}
+            </p>
         </div>
     </div>    
 </div>

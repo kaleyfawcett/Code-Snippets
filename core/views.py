@@ -2,8 +2,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 
 from .models import CodeSnippet
-# from .models import Tag
-from .forms import SnippetForm, TagForm
+from .models import Tag
+from .forms import SnippetForm
 
 def homepage(request):
     if request.user.is_authenticated:
@@ -24,6 +24,7 @@ def new_snippets(request):
             snippet = form.save(commit=False)
             snippet.user = request.user
             snippet.save()
+            snippet.set_tag_names(form.cleaned_data['tag_names'])
         return redirect(to='singular_snippet', snippet_pk=snippet.pk)
     else:
         form = SnippetForm()
@@ -49,10 +50,17 @@ def edit_snippet(request, snippet_pk):
         form = SnippetForm(instance=snippet, data=request.POST)
         if form.is_valid():
             snippet = form.save()
+            snippet.set_tag_names(form.cleaned_data['tag_names'])
             return redirect(to="singular_snippet", snippet_pk=snippet.pk)
     else: 
-        form = SnippetForm(instance=snippet)
-    return render(request, "snippets/edit_snippet.html", {"form": form, "snippet": snippet})            
+        form = SnippetForm(instance=snippet, initial={"tag_names": snippet.get_tag_names()})
+    return render(request, "snippets/edit_snippet.html", {"form": form, "snippet": snippet})     
+
+@login_required
+def view_tag(request, tag_name):
+    tag = get_object_or_404(Tag, tag=tag_name)
+    snippets = tag.codesnippets.filter(user=request.user)
+    return render(request, "snippets/tag_detail.html", {"tag": tag, "snippets": snippets})           
 
 
 

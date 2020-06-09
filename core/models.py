@@ -2,7 +2,7 @@ from django.db import models
 from users.models import User 
 
 class Tag(models.Model):
-    tag = models.CharField(max_length=200, unique=True) 
+    tag = models.CharField(max_length=100, unique=True) 
 
     def __str__(self):
         return self.tag 
@@ -17,5 +17,26 @@ class CodeSnippet(models.Model):
     parent = models.ForeignKey(to ='self', on_delete=models.SET_NULL, related_name='children', null=True, blank =True)
     tags = models.ManyToManyField(to=Tag, related_name='codesnippets')
 
+
+
+    def get_tag_names(self):
+        tag_names = []
+        for tag in self.tags.all():
+            tag_names.append(tag.tag)
+
+        return " ".join(tag_names)  
+
+    def set_tag_names(self, tag_names):
+        tag_names = tag_names.split()
+        tags = []
+        for tag_name in tag_names:
+            tag = Tag.objects.filter(tag=tag_name).first()
+            if tag is None:
+                tag = Tag.objects.create(tag=tag_name)
+            tags.append(tag)
+        self.tags.set(tags)        
+
+
+
     def __str__(self):
-        return self.title 
+        return self.title       

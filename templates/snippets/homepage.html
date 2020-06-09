@@ -1,9 +1,14 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div>
-    <h2 class= "col px-md-5 p-3">Welcome to Code Snippets!</h2>
-    <p class="col px-md-5 p-3 border bg-light">Please <a href="{% url 'auth_login' %}">login</a> or <a href="{% url 'registration_register' %}">create a new account</a>.</p>
+<div class="card bg-dark text-black">
+    <img src="https://images.unsplash.com/photo-1550645612-83f5d594b671?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80" class="card-img" alt="...">
+    <div class="card-img-overlay">
+        <div class="card p-2">
+        <h2 class= "col px-md-5 p-3 card-header">Welcome to Code Snippets!</h2>
+        <p class="col px-md-5 p-3 border bg-light">Please <a href="{% url 'auth_login' %}">login</a> or <a href="{% url 'registration_register' %}">create a new account</a>.</p>
+        </div>
+    </div>
         
 </div>
 {% endblock %}
