@@ -72,3 +72,16 @@ def search_snippets(request):
         snippets = None 
 
     return render(request, "snippets/search_snippets.html", {"snippets": snippets, "query": query})
+
+@login_required
+def copy_snippet(request, snippet_pk):
+    original_snippet = get_object_or_404(CodeSnippet, pk=snippet_pk)
+    cloned_snippet = CodeSnippet(
+        title=original_snippet.title + " (Copy)",
+        code_body=original_snippet.code_body,
+        user=request.user,
+        original_snippet=original_snippet,
+     ) 
+    cloned_snippet.save()   
+    cloned_snippet.tags.set(original_snippet.tags.all())
+    return redirect(to='singular_snippet', snippet_pk=cloned_snippet.pk) 

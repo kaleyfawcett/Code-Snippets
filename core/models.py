@@ -24,6 +24,7 @@ class CodeSnippet(models.Model):
     is_public = models.BooleanField(default=True)
     parent = models.ForeignKey(to ='self', on_delete=models.SET_NULL, related_name='children', null=True, blank =True)
     tags = models.ManyToManyField(to=Tag, related_name='codesnippets')
+    original_snippet = models.ForeignKey(to='self', on_delete=models.SET_NULL, null=True, blank=True)
 
 
 
