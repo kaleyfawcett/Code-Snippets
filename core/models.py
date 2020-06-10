@@ -50,5 +50,5 @@ class CodeSnippet(models.Model):
 
 def search_snippets_for_user(user, query):
     return user.codesnippets.filter(
-        Q(title__icontains=query)|Q(tags__icontains=query)).distinct()
+        Q(title__icontains=query)|Q(tags__tag__icontains=query)).distinct()
         
