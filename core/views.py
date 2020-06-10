@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 
 from .models import CodeSnippet
-from .models import Tag
+from .models import Tag, search_snippets_for_user
 from .forms import SnippetForm
 
 def homepage(request):
@@ -63,5 +63,12 @@ def view_tag(request, tag_name):
     return render(request, "snippets/tag_detail.html", {"tag": tag, "snippets": snippets})           
 
 
+@login_required
+def search_snippets(request):
+    query = request.GET.get('q')
+    if query is not None:
+        snippets = search_snippets_for_user(request.user, query)
+    else:
+        snippets = None 
 
-
+    return render(request, "snippets/search_snippets.html", {"snippets": snippets, "query": query})

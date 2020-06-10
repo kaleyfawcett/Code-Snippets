@@ -1,5 +1,13 @@
 from django.db import models
+from django.db.models import Q 
 from users.models import User 
+
+LANGUAGE_CHOICES = (
+    ('HTML', 'HTML'),
+    ('CSS', 'CSS'),
+    ('JAVASCRIPT', 'JavaScript'),
+    ('PYTHON', 'Python'),
+)
 
 class Tag(models.Model):
     tag = models.CharField(max_length=100, unique=True) 
@@ -10,7 +18,7 @@ class Tag(models.Model):
 class CodeSnippet(models.Model): 
     user = models.ForeignKey(to=User, on_delete=models.CASCADE, related_name= 'codesnippets')
     title = models.CharField(max_length=250, blank=True, default= '')
-    language = models.CharField(max_length=100)
+    language = models.CharField(max_length=100, choices=LANGUAGE_CHOICES, default='HTML')
     created_at = models.DateTimeField(auto_now_add=True)
     code_body = models.TextField()
     is_public = models.BooleanField(default=True)
@@ -37,6 +45,10 @@ class CodeSnippet(models.Model):
         self.tags.set(tags)        
 
 
-
     def __str__(self):
         return self.title       
+
+def search_snippets_for_user(user, query):
+    return user.codesnippets.filter(
+        Q(title__icontains=query)|Q(tags__icontains=query)).distinct()
+        

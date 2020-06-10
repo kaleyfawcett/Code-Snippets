@@ -34,10 +34,13 @@
                 {% if snippet.tags.count > 0 %}
                 
                 {% for tag in snippet.tags.all %}
+                <span class="p-2 border border-dark">
                     <a href="{% url 'view_tag' tag_name=tag.tag %}">{{ tag }}</a>
+                </span>    
                 {% endfor %}
                 
                 {% endif %}
+                
             </p>
         </div>
     </div>    
