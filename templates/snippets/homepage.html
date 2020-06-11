@@ -2,14 +2,27 @@
 
 {% block content %}
 <div class="card bg-dark text-black">
-    <img src="https://images.unsplash.com/photo-1550645612-83f5d594b671?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80" class="card-img" alt="...">
+    <img src="https://i.pinimg.com/originals/d8/fd/51/d8fd511e152d96bc95283436f1816ed0.jpg" class="card-img" alt="...">
     <div class="card-img-overlay">
         <div class="card p-2">
         <h2 class= "col px-md-5 p-3 card-header text-monospace">Welcome to your Code Snippet Matrix</h2>
         <h6 class="px-md-5 p-3  text-monospace"> For when you can't keep all of that code stored in your brain, let the Code Matrix take over</h6>
-        <p class="col px-md-5 p-3 border bg-light">Please <a href="{% url 'auth_login' %}">login</a> or <a href="{% url 'registration_register' %}">create a new account</a>.</p>
+        
+        <div class= "card bg-dark text-white">
+            <div class="card-img-overlay">
+            <h3 class= "px-md-5 d-inline">Please <a href="{% url 'auth_login' %}" class= "text-danger bg-light rounded-pill p-1" > login</a>
+              
+        <div class="mx-auto" style="width: 25px;"> or</div> 
+              
+            <div class ="float-md-right px-md-5">
+                <a href="{% url 'registration_register' %}" class= "bg-light d-inline-block rounded-pill p-1">create a new account</a></h3>
+            </div> 
+            </div>    
+
         </div>
     </div>
+</div>    
+
         
-</div>
+
 {% endblock %}
